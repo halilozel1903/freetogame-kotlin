@@ -1,0 +1,4 @@
+[
+  {"id":11,"title":"Neverwinter","thumbnail":"https:\/\/www.freetogame.com\/g\/11\/thumbnail.jpg","short_description":"A free-to-play 3D action MMORPG based on the acclaimed Dungeons & Dragons fantasy roleplaying game.","game_url":"https:\/\/www.freetogame.com\/open\/neverwinter","genre":"MMORPG","platform":"PC (Windows)","publisher":"Perfect World Entertainment","developer":"Cryptic Studios","release_date":"2013-12-06","freetogame_profile_url":"https:\/\/www.freetogame.com\/neverwinter"},
+  {"id":21,"title":"Example Fantasy MMO","thumbnail":"https:\/\/www.freetogame.com\/g\/21\/thumbnail.jpg","short_description":"A test entry for the filter endpoint.","game_url":"https:\/\/www.freetogame.com\/open\/example-fantasy","genre":"MMORPG","platform":"PC (Windows)","publisher":"Example","developer":"Example","release_date":"2015-06-30","freetogame_profile_url":"https:\/\/www.freetogame.com\/example-fantasy"}
+]

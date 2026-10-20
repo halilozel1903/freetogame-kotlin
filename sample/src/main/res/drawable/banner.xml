@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 320 x 180 dp launcher banner for Android TV: a game controller next to rails of game cards. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+    <path android:pathData="M0,0h320v180h-320z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="320"
+                android:endY="180"
+                android:startX="0"
+                android:startY="0"
+                android:type="linear">
+                <item android:color="#FF0B0F17" android:offset="0" />
+                <item android:color="#FF102A33" android:offset="0.6" />
+                <item android:color="#FF135E59" android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- Controller body: two grips joined by a bar. -->
+    <path
+        android:fillColor="#FF5EEAD4"
+        android:pathData="M48,62h64a26,26 0,0 1,26 26v4a26,26 0,0 1,-26 26c-10,0 -14,-8 -22,-8h-20c-8,0 -12,8 -22,8a26,26 0,0 1,-26 -26v-4a26,26 0,0 1,26 -26z" />
+    <!-- D-pad. -->
+    <path
+        android:fillColor="#FF0B0F17"
+        android:pathData="M45,80h8v8h8v8h-8v8h-8v-8h-8v-8h8z" />
+    <!-- Buttons. -->
+    <path
+        android:fillColor="#FF0B0F17"
+        android:pathData="M115,84m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" />
+    <path
+        android:fillColor="#FF0B0F17"
+        android:pathData="M104,95m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" />
+    <path
+        android:fillColor="#FFFFC266"
+        android:pathData="M126,95m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" />
+    <!-- Rails of game cards. -->
+    <path android:fillColor="#40FFFFFF" android:pathData="M164,40h40a5,5 0,0 1,5 5v18a5,5 0,0 1,-5 5h-40a5,5 0,0 1,-5 -5v-18a5,5 0,0 1,5 -5z" />
+    <path android:fillColor="#FFF1F4F9" android:pathData="M218,36h48a6,6 0,0 1,6 6v24a6,6 0,0 1,-6 6h-48a6,6 0,0 1,-6 -6v-24a6,6 0,0 1,6 -6z" />
+    <path android:fillColor="#FF5EEAD4" android:pathData="M218,36h48a6,6 0,0 1,6 6v12h-60v-12a6,6 0,0 1,6 -6z" />
+    <path android:fillColor="#40FFFFFF" android:pathData="M280,40h40v28h-40a5,5 0,0 1,-5 -5v-18a5,5 0,0 1,5 -5z" />
+    <path android:fillColor="#33FFFFFF" android:pathData="M164,80h40a5,5 0,0 1,5 5v18a5,5 0,0 1,-5 5h-40a5,5 0,0 1,-5 -5v-18a5,5 0,0 1,5 -5z" />
+    <path android:fillColor="#33FFFFFF" android:pathData="M220,80h40a5,5 0,0 1,5 5v18a5,5 0,0 1,-5 5h-40a5,5 0,0 1,-5 -5v-18a5,5 0,0 1,5 -5z" />
+    <path android:fillColor="#33FFFFFF" android:pathData="M276,80h44v28h-44a5,5 0,0 1,-5 -5v-18a5,5 0,0 1,5 -5z" />
+    <path android:fillColor="#26FFFFFF" android:pathData="M164,120h40a5,5 0,0 1,5 5v18a5,5 0,0 1,-5 5h-40a5,5 0,0 1,-5 -5v-18a5,5 0,0 1,5 -5z" />
+    <path android:fillColor="#26FFFFFF" android:pathData="M220,120h40a5,5 0,0 1,5 5v18a5,5 0,0 1,-5 5h-40a5,5 0,0 1,-5 -5v-18a5,5 0,0 1,5 -5z" />
+    <path android:fillColor="#26FFFFFF" android:pathData="M276,120h44v28h-44a5,5 0,0 1,-5 -5v-18a5,5 0,0 1,5 -5z" />
+    <path android:fillColor="#FFFFC266" android:pathData="M40,140h88a3,3 0,0 1,3 3v0a3,3 0,0 1,-3 3h-88a3,3 0,0 1,-3 -3v0a3,3 0,0 1,3 -3z" />
+</vector>
