@@ -1,6 +1,9 @@
 package io.github.halilozel1903.freetogame.sample
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.BringIntoViewSpec
+import androidx.compose.foundation.gestures.LocalBringIntoViewSpec
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,8 +17,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -39,6 +44,7 @@ import androidx.tv.material3.Text
 import io.github.halilozel1903.freetogame.GameTag
 import io.github.halilozel1903.freetogame.Platform
 import io.github.halilozel1903.freetogame.model.GameDetails
+import kotlin.math.abs
 
 /** Rail cards are small enough that the hero and two rails fit on a 1080p screen. */
 private val HomeCardWidth = 176.dp
@@ -65,6 +71,7 @@ fun HomeScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun HomeContent(
     data: HomeData,
@@ -83,13 +90,33 @@ private fun HomeContent(
             focusedPlatform = data.platform.name
         }
     }
-    LazyColumn(
-        state = rememberLazyListState(),
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = 32.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-    ) {
-        item(key = "hero") {
+    // On a TV, Compose scrolls a focused item to a pivot about a third down the screen. For the column that would
+    // push the header off the top as soon as the hero's button takes focus, so the column scrolls only as far as
+    // needed; the rails inside keep the TV behaviour.
+    val tvSpec = LocalBringIntoViewSpec.current
+    CompositionLocalProvider(LocalBringIntoViewSpec provides MinimalBringIntoViewSpec) {
+        LazyColumn(
+            state = rememberLazyListState(),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(bottom = 32.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            homeItems(data, tvSpec, heroFocus, onPlatformChange, onOpenGame, onOpenGenre)
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+private fun LazyListScope.homeItems(
+    data: HomeData,
+    tvSpec: BringIntoViewSpec,
+    heroFocus: FocusRequester,
+    onPlatformChange: (Platform) -> Unit,
+    onOpenGame: (Int) -> Unit,
+    onOpenGenre: (GameTag) -> Unit,
+) {
+    item(key = "hero") {
+        CompositionLocalProvider(LocalBringIntoViewSpec provides tvSpec) {
             Hero(
                 game = data.hero,
                 platform = data.platform,
@@ -99,8 +126,10 @@ private fun HomeContent(
                 buttonModifier = Modifier.focusRequester(heroFocus),
             )
         }
-        for (rail in data.rails) {
-            item(key = rail.key) {
+    }
+    for (rail in data.rails) {
+        item(key = rail.key) {
+            CompositionLocalProvider(LocalBringIntoViewSpec provides tvSpec) {
                 GameRailRow(
                     title = rail.title,
                     hint = rail.hint,
@@ -112,8 +141,22 @@ private fun HomeContent(
                 )
             }
         }
-        item(key = "attribution") {
-            Attribution(Modifier.padding(horizontal = ScreenPadding, vertical = 8.dp))
+    }
+    item(key = "attribution") {
+        Attribution(Modifier.padding(horizontal = ScreenPadding, vertical = 8.dp))
+    }
+}
+
+/** Scrolls a focused item just into view, and not at all when it is already visible. */
+@OptIn(ExperimentalFoundationApi::class)
+private val MinimalBringIntoViewSpec = object : BringIntoViewSpec {
+    override fun calculateScrollDistance(offset: Float, size: Float, containerSize: Float): Float {
+        val trailing = offset + size
+        return when {
+            offset >= 0f && trailing <= containerSize -> 0f
+            offset < 0f && trailing > containerSize -> 0f
+            abs(offset) < abs(trailing - containerSize) -> offset
+            else -> trailing - containerSize
         }
     }
 }

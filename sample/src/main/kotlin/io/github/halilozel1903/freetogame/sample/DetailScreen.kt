@@ -94,7 +94,8 @@ private fun DetailContent(game: GameDetails) {
                 color = colors.onSurfaceVariant,
             )
             LazyRow(
-                contentPadding = PaddingValues(vertical = 8.dp, horizontal = 2.dp),
+                // Room for the focused thumbnail's 1.1x scale and border, so neither is clipped at the row's edges.
+                contentPadding = PaddingValues(vertical = 10.dp, horizontal = 10.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 itemsIndexed(shots, key = { index, shot -> "${shot.id}-$index" }) { index, shot ->
